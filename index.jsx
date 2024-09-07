@@ -17,11 +17,10 @@ app.at('GET /logout', async (c) => {
 
 app.at('POST /form/login', login)
 
+app.at('POST /form/receipt', async (c) => {
+    c.redirect(`/app?token=${Bun.env.URL_SECRET_TOKEN}`)
+})
+
 
 console.log('running on port 8080')
-Bun.serve({
-    port: 8080,
-    async fetch(req) {
-        return await app.handleRequest(req)
-    },
-});
+await app.run(8080)

@@ -8,5 +8,9 @@ export function home(c) {
 
 
 export function appHome(c) {
+    let token = c.param('token')
+    if (token != Bun.env.URL_SECRET_TOKEN) {
+        c.redirect('/')
+    }
     c.jsx(<AppHome />)
 }

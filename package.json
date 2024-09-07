@@ -1,21 +1,21 @@
 {
   "name": "receipts",
-  "module": "index.jsx",
-  "description": "tiny http server for bun",
-  "author": "Phillip England",
   "version": "0.0.1",
-  "type": "module",
-  "scripts": {
-    "dev": "bun --hot run index.jsx",
-    "tw": "tailwindcss -i './static/css/input.css' -o './static/css/output.css' --watch"
-  },
+  "author": "Phillip England",
+  "module": "index.jsx",
   "devDependencies": {
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "description": "tiny http server for bun",
+  "scripts": {
+    "dev": "bun --hot run index.jsx",
+    "tw": "tailwindcss -i './static/css/input.css' -o './static/css/output.css' --watch"
+  },
+  "type": "module",
   "dependencies": {
-    "xerus": "github:Phillip-England/xerus"
+    "xerus": "github:phillip-england/xerus"
   }
 }
