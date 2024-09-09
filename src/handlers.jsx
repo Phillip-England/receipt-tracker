@@ -14,3 +14,8 @@ export function appHome(c) {
     }
     c.jsx(<AppHome />)
 }
+
+
+export function logout(c) {
+	c.redirect('/')
+}
