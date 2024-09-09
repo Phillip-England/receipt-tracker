@@ -90,7 +90,7 @@ export function FormInput(props) {
         <div className='flex flex-col gap-1'>
             <label className='text-sm'>{props.label}</label>
             {props.inputType == 'textarea' ?
-                <textarea rows={props.rows} className='border rounded text-sm p-1 outline-none border-gray-200 focus:border-gray-400' />
+                <textarea rows={props.rows} name={props.name} className='border rounded text-sm p-1 outline-none border-gray-200 focus:border-gray-400' />
             :
                 <input name={props.name} type={props.inputType}  className='border rounded text-sm p-1 outline-none border-gray-200 focus:border-gray-400' />        
             }
@@ -114,7 +114,7 @@ export function LoginForm(props) {
 
 export function UploadReceiptForm(props) {
     return (
-        <form className='flex flex-col gap-12 p-4' action="/form/receipt" method='POST' _multi-photo-form='#hidden-upload-button:#photo-container:#undo-icon:200:flex' >
+        <form className='flex flex-col gap-12 p-4' action="/form/receipt" method='POST' _multi-photo-form='#hidden-upload-button:#photo-container:#undo-icon:200:flex' encType="multipart/form-data" >
             <div className='flex flex-col gap-4'>
                 <h2 className='font-bold text-xl'>Upload Receipts</h2>
                 <p className='text-sm text-red-500'>{props.err}</p>
@@ -127,7 +127,7 @@ export function UploadReceiptForm(props) {
                     <IconUndo />
                 </div>
             </div>
-            <input type='file' className='hidden' id='hidden-upload-button' />
+            <input type='file' name='files' className='hidden' id='hidden-upload-button' />
             <input type='submit' className='bg-black text-white p-2 rounded text-sm cursor-pointer' value='Submit' />
         </form>
     )
