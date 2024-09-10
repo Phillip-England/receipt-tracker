@@ -46,6 +46,25 @@ export function AppHome(props) {
     )
 }
 
+export function AppNewReceipts(props) {
+    return (
+        <Layout title="App - Receipts">
+            <Header hasIcons={true}  />
+            <NavMenu />
+            <Overlay id='nav-overlay' hidden={true} />
+            {props.receipts.map((item, index) => {
+                return (
+                    <>
+                        <p>testing</p>
+                        <p>{item.name}</p>
+                    </>
+                )
+
+            })}
+        </Layout> 
+    )
+}
+
 //=================================
 // REUSED HTPL EVENTS
 //=================================
@@ -57,11 +76,6 @@ const TOGGLE_NAV_MENU = `click:#header-bars #header-x #nav-menu #nav-overlay:hid
 //=================================
 
 export function Header(props) {
-
-
-    let somefunc = () => {
-        console.log('yo')
-    }
 
     return (
         <header id='header' className='flex flex-row justify-between border-b z-50 relative bg-white'>
@@ -169,7 +183,8 @@ export function NavMenu(props) {
         <nav id='nav-menu' className='absolute top-0 w-3/4 hidden z-40 bg-white'>
             <ul className='p-2 flex flex-col gap-2 border-r h-[100vh]'>
                 <div id='nav-buffer' _match-height='#header'></div>
-                <NavLink text='Upload Receipts' href="/app" />
+                <NavLink text='Upload Receipts' href={`/app?token=${Bun.env.URL_SECRET_TOKEN}`} />
+                <NavLink text='New Receipts' href='/app/receipts' />
                 <NavLink text='Logout' href="/logout" />
             </ul>
         </nav>

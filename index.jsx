@@ -2,7 +2,7 @@ import { Xerus } from "xerus/Xerus";
 import { logger, timeout } from "xerus/XerusMiddleware";
 import { Database } from "bun:sqlite"
 
-import { appHome, home, logout } from "./src/handlers";
+import { appHome, home, logout, newReceipts } from "./src/handlers";
 import { login, uploadReceipt } from "./src/forms";
 import { PhotoPath, ReceiptUpload } from "./src/models";
 
@@ -20,6 +20,7 @@ app.use('*', timeout, logger)
 
 app.at('GET /', home)
 app.at('GET /app', appHome)
+app.at('GET /app/receipts', newReceipts)
 app.at('GET /logout', logout)
 
 app.at('POST /form/login', login)
