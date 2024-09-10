@@ -54,10 +54,10 @@ export function AppNewReceipts(props) {
             <Overlay id='nav-overlay' hidden={true} />
             {props.receipts.map((item, index) => {
                 return (
-                    <>
+                    <div key={index}>
                         <p>testing</p>
                         <p>{item.name}</p>
-                    </>
+                    </div>
                 )
 
             })}
