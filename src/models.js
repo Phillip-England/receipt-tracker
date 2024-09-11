@@ -39,7 +39,7 @@ export class PhotoPath {
 
     static createTable(db) {
         let query = db.query(`CREATE TABLE IF NOT EXISTS photo_path (
-            id SERIAL PRIMARY KEY,
+            iid INTEGER PRIMARY KEY AUTOINCREMENT,
             receipt_id INT REFERENCES receipt_upload(id),
             path VARCHAR(255)
         )`)

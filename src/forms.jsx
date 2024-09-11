@@ -37,13 +37,15 @@ export async function uploadReceipt(c) {
             $reason: receiptUpload.reason
         });
         let receiptId = receiptResult.lastInsertRowid; 
+		let photoCount = 0
         for (let photoPath of photoPaths) {
-            let finalPath = '/static/img/uploads/receipts/'+photoPath.file.name
+            let finalPath = '/static/img/uploads/receipts/'+photoCount+photoPath.ext
             insertPhoto.run({
                 $receipt_id: receiptId,
                 $path: finalPath
             });
             Bun.write("./"+finalPath, photoPath.file)
+			photoCount++
         }
     });
     try {

@@ -54,12 +54,12 @@ export function AppNewReceipts(props) {
             <Overlay id='nav-overlay' hidden={true} />
             {props.receipts.map((item, index) => {
                 return (
-                    <div key={index}>
-                        <p>testing</p>
+                    <div className='flex flex-col p-2' key={index}>
                         <p>{item.name}</p>
-						{item.photo.map((photo, index2) => {
+						<p>{item.reason}</p>
+						{item.photos.map((photo, index2) => {
 							return (
-								<div>
+								<div key={index2}>
 									<p>{photo.id}</p>
 									<img src={photo.path} />
 								</div>

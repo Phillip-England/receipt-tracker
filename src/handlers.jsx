@@ -31,7 +31,7 @@ export async function newReceipts(c) {
         let photoResult = await photoQuery.all({
             $receipt_id: receiptUpload.id
         })
-        receiptUpload.photo = photoResult
+        receiptUpload.photos = photoResult
     }
     c.jsx(<AppNewReceipts receipts={receiptResult} />)
 }
