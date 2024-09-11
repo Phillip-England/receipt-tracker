@@ -47,7 +47,6 @@ export function AppHome(props) {
 }
 
 export function AppNewReceipts(props) {
-	console.log(props.receipts[0].photo)
     return (
         <Layout title="App - Receipts">
             <Header hasIcons={true}  />

@@ -43,7 +43,7 @@ export async function uploadReceipt(c) {
                 $receipt_id: receiptId,
                 $path: finalPath
             });
-            Bun.write(finalPath, photoPath.file)
+            Bun.write("./"+finalPath, photoPath.file)
         }
     });
     try {
