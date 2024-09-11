@@ -38,7 +38,7 @@ export async function uploadReceipt(c) {
         });
         let receiptId = receiptResult.lastInsertRowid; 
         for (let photoPath of photoPaths) {
-            let finalPath = './static/img/uploads/receipts/'+photoPath.file.name
+            let finalPath = '/static/img/uploads/receipts/'+photoPath.file.name
             insertPhoto.run({
                 $receipt_id: receiptId,
                 $path: finalPath

@@ -47,6 +47,7 @@ export function AppHome(props) {
 }
 
 export function AppNewReceipts(props) {
+	console.log(props.receipts[0].photo)
     return (
         <Layout title="App - Receipts">
             <Header hasIcons={true}  />
@@ -57,6 +58,14 @@ export function AppNewReceipts(props) {
                     <div key={index}>
                         <p>testing</p>
                         <p>{item.name}</p>
+						{item.photo.map((photo, index2) => {
+							return (
+								<div>
+									<p>{photo.id}</p>
+									<img src={photo.path} />
+								</div>
+							)
+						})}
                     </div>
                 )
 
