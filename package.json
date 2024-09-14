@@ -16,6 +16,7 @@
   },
   "type": "module",
   "dependencies": {
-    "xerus": "github:phillip-england/xerus"
+    "server": "github:react-dom/server",
+    "xerus": "^0.0.18"
   }
 }

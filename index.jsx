@@ -1,31 +1,75 @@
-import { Xerus } from "xerus/Xerus";
-import { logger, timeout } from "xerus/XerusMiddleware";
-import { Database } from "bun:sqlite"
+import { Xerus, logger, timeout } from "xerus";
 
-import { appHome, home, logout, newReceipts } from "./src/handlers";
-import { login, uploadReceipt } from "./src/forms";
-import { PhotoPath, ReceiptUpload } from "./src/models";
+const app = new Xerus();
 
-const app = new Xerus()
+app.use("*", logger, timeout);
 
-let db = new Database("main.sqlite", {create: true})
-db.exec("PRAGMA journal_mode = WAL;");
-ReceiptUpload.createTable(db)
-PhotoPath.createTable(db)
+function Layout(props) {
+  return (
+    <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{props.title}</title>
+      </head>
+      <body>{props.children}</body>
+    </html>
+  );
+}
 
-app.global('db', db)
+function LoginForm(props) {
+  return (
+    <form action="/form/login" method="POST">
+      <label>username</label>
+      <input name="username" type="text" defaultValue="username" />
+      <label>password</label>
+      <input name="password" type="password" defaultValue="password" />
+      <input type="submit" />
+    </form>
+  );
+}
 
+function Nav(props) {
+  return (
+    <nav>
+      <li>
+        <a href="/app">Packages</a>
+      </li>
+      <li>
+        <a href="/logout">Logout</a>
+      </li>
+    </nav>,
+  );
+}
 
-app.use('*', timeout, logger)
+app.get("/", async (c) => {
+  c.jsx(
+    <Layout title="Receipt Tracker">
+      <LoginForm />
+    </Layout>,
+  );
+});
 
-app.at('GET /', home)
-app.at('GET /app', appHome)
-app.at('GET /app/receipts', newReceipts)
-app.at('GET /logout', logout)
+app.post("/form/login", async (c) => {
+  let data = await c.form();
+  let username = data.get("username");
+  let password = data.get("password");
+  if (username == Bun.env.USERNAME && password == Bun.env.PASSWORD) {
+    c.redirect("/app");
+    return;
+  }
+  c.redirect("/?loginErr=invalid credentials");
+});
 
-app.at('POST /form/login', login)
-app.at('POST /form/receipt', uploadReceipt)
+app.get("/logout", async (c) => {
+  c.redirect("/");
+});
 
+app.get("/app", async (c) => {
+  c.jsx(
+    <Layout title="Receipt Tracker">
+      <Nav />
+    </Layout>,
+  );
+});
 
-console.log('running on port 8080')
-await app.run(8080)
+await app.run(8080);
